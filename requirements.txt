@@ -1,0 +1,10 @@
+pylint
+pytest
+click
+black
+pytest-cov
+matplotlib
+pandas
+openpyxl
+fire == 0.7.0
+requests == 2.32.3
