@@ -1,6 +1,6 @@
-[![Rust Test with Github Actions](https://github.com/nogibjj/lilah_duboff_individualproj2/actions/workflows/rust_actions.yml/badge.svg)](https://github.com/nogibjj/lilah_duboff_individualproj2/actions/workflows/rust_actions.yml)
-
 [![Python Test with Github Actions](https://github.com/nogibjj/lilah_duboff_individualproj2/actions/workflows/python_actions.yml/badge.svg)](https://github.com/nogibjj/lilah_duboff_individualproj2/actions/workflows/python_actions.yml)
+
+[![Rust Test with Github Actions](https://github.com/nogibjj/lilah_duboff_individualproj2/actions/workflows/rust_actions.yml/badge.svg)](https://github.com/nogibjj/lilah_duboff_individualproj2/actions/workflows/rust_actions.yml)
 
 # Individual Project 2/Mini Project 8: Rewriting a CRUD Operations Python Script in Rust
 ---
