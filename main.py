@@ -8,33 +8,12 @@ from SQL_files.transform import transform
 from SQL_files.query import create, read, update, delete, query_1, query_2
 import time
 
-database = "remotehealthDB.db"
-table = "remote_health"
-url = "https://raw.githubusercontent.com/lilah-duboff/data-for-URLS/refs/heads/main/Impact_of_Remote_Work_on_Mental_Health.csv"
-path = "data/remote_work_mental_health_data.csv"
+database = "./sqlite/my_database.db"
+table = "wages"
+url = "https://raw.githubusercontent.com/lilah-duboff/data-for-URLS/refs/heads/main/wages_by_education%20copy.csv"
+path = "data/wages_by_education copy.csv"
 folder = "data"
-payload = (
-    "EMP5001",
-    37,
-    "Non-binary",
-    "Nurse",
-    "Healthcare",
-    12,
-    "Hybrid",
-    46,
-    7,
-    2,
-    "Low",
-    "Depression",
-    "No",
-    "Decrease",
-    1,
-    "Unsatisfied",
-    1,
-    "Weekly",
-    "Good",
-    "Europe",
-)
+payload = (2025, 15.00, 18.00, 20.00, 30.00, 50.00)
 
 
 # Extract
@@ -53,10 +32,10 @@ create(payload, database, table)
 read(database, table)
 
 # UPDATE
-update(database, table, "Age", 35, "EMP0040")
+update(database, table, "year", 2026, "2022")
 
 # DELETE
-delete(database, table, "EMP0040")
+delete(database, table, "2026")
 
 
 # Query

@@ -8,31 +8,17 @@ def create(payload, data, table):
     c.execute(
         f"""
               CREATE TABLE IF NOT EXISTS {table} (
-                    Employee_ID,
-                    Gender, 
-                    Age,
-                    Job_Role,
-                    Industry,
-                    Years_of_Experience,
-                    Work_Location,
-                    Hours_Worked_Per_Week,
-                    Number_of_Virtual_Meetings,
-                    Work_Life_Balance_Rating,
-                    Stress_Level,
-                    Mental_Health_Condition,
-                    Access_to_Mental_Health_Resources,
-                    Productivity_Change,
-                    Social_Isolation_Rating,
-                    Satisfaction_with_Remote_Work,
-                    Company_Support_for_Remote_Work,
-                    Physical_Activity,
-                    Sleep_Quality,
-                    Region 
+                    year INTEGER,
+                    less_than_hs REAL,
+                    high_school REAL,
+                    some_college REAL,
+                    bachelors_degree REAL,
+                    advanced_degree REAL
                   )
               """
     )
 
-    query = f"INSERT INTO {table} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+    query = f"INSERT INTO {table} VALUES (?, ?, ?, ?, ?, ?)"
     c.execute(query, payload)
 
     conn.commit()
@@ -42,27 +28,26 @@ def create(payload, data, table):
     return "Record inserted successfully"
 
 
-
 def read(data, table):
     """Read data from the table"""
     conn = sqlite3.connect(data)
     c = conn.cursor()
-    
+
     query = f"SELECT * FROM {table} LIMIT 10"
     c.execute(query)
 
     read_result = c.fetchall()
     conn.close()
-    
+
     return read_result
 
 
-def update(data, table, column, new_value, ID_number):
+def update(data, table, column, new_value, year):
     """Update a specific column in a row based on Employee_ID"""
     conn = sqlite3.connect(data)
     c = conn.cursor()
-    query = f"UPDATE {table} SET {column} = ? WHERE Employee_ID = ?"
-    c.execute(query, (new_value, ID_number))
+    query = f"UPDATE {table} SET {column} = ? WHERE year = ?"
+    c.execute(query, (new_value, year))
     affected_rows = c.rowcount
     conn.commit()
     c.close()
@@ -75,12 +60,12 @@ def update(data, table, column, new_value, ID_number):
     return "Record updated successfully!"
 
 
-def delete(database, table, ID_number):
-    """Delete a specific column in a row based on Employee_ID"""
+def delete(database, table, year):
+    """Delete a specific column in a row based on year"""
     conn = sqlite3.connect(database)
     c = conn.cursor()
-    query = f"DELETE FROM {table} WHERE Employee_ID = ?"
-    c.execute(query, (ID_number,))
+    query = f"DELETE FROM {table} WHERE year = ?"
+    c.execute(query, (year,))
     changed_rows = c.rowcount
     conn.commit()
     c.close()
@@ -95,10 +80,10 @@ def delete(database, table, ID_number):
 
 def query_1():
     """queries the db for top five rows"""
-    conn = sqlite3.connect("remotehealthDB.db")
+    conn = sqlite3.connect("my_database.db")
     c = conn.cursor()
-    c.execute("SELECT * FROM remote_health LIMIT 5")
-    print("Top 5 rows of the remote_health table:")
+    c.execute("SELECT * FROM wages LIMIT 5")
+    print("Top 5 rows of the wages table:")
     query_1_result = c.fetchall()
     print("Query is complete")
     conn.close()
@@ -106,14 +91,13 @@ def query_1():
 
 
 def query_2():
-    """queries the db for max hours worked per week,
-    and collects the subsequent information"""
-    conn = sqlite3.connect("remotehealthDB.db")
+    """queries the db for average wage based on level of education"""
+    conn = sqlite3.connect("my_database.db")
     c = conn.cursor()
     c.execute(
-        "SELECT Job_Role, Industry, Hours_Worked_Per_Week, Stress_Level, Mental_Health_Condition FROM remote_health WHERE Hours_Worked_Per_Week=(SELECT MAX(Hours_worked_per_week) FROM remote_health) LIMIT 5"
+        "SELECT year, AVG(less_than_hs), AVG(high_school), AVG(some_college), AVG(bachelors_degree), AVG(advanced_degree) FROM wages WHERE year > 2010 GROUP BY year"
     )
-    print("Max hours worked per week from remote_health table:")
+    print("Average hourly pay from wages table, based on education level:")
     query_2_result = c.fetchall()
     print("Query is complete!")
     conn.close()
