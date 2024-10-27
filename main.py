@@ -3,10 +3,11 @@
 ETL-Query script
 """
 
-from SQL_files.extract import extract_data
-from SQL_files.transform import transform
-from SQL_files.query import create, read, update, delete, query_1, query_2
-import time
+from python_files.extract import extract_data
+from python_files.transform import transform
+from python_files.query import create, read, update, delete, query_1, query_2
+
+# import time
 
 database = "./sqlite/my_database.db"
 table = "wages"
