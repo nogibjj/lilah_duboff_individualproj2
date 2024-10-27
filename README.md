@@ -1,28 +1,45 @@
 
-[![CI](https://github.com/nogibjj/lilah_dubof_miniproj7/actions/workflows/CI.yml/badge.svg)](https://github.com/nogibjj/lilah_dubof_miniproj7/actions/workflows/CI.yml)
 
-# Mini Project 7: Functional Command Line Tool with Rust
-#### Unlike the previous projects, this ReadMe provides instructions for setup and use 
+# Individual Project 2/Mini Project 8: Rewriting a CRUD Operations Python Script in Rust
 ---
+### The purpose of this project is to take an existing python project, convert it to Rust, and compare the speed and efficiency of both scripts. This projects demonstrates how to perform CRUD operations in both Rust and Python, using a CLI (Command Line Integration) Tool. As usual, the folder structure and project walkthrough are below - however, I've decided to show my analysis results at the top of the readme for convenience, and directions for setup and use of the CLI tools are below.  
+---
+### Demo Video Link:
 
+___
+### Rust vs Python - which is faster?
+
+___
 ### Structure for this Project
 ---
 - .devcontainer
     - devcontainer.json
     - Dockerfile
 - .github
-    - CI.yml
-- add (ignore, this is a generated folder)
+    - python_actions.yml
+    - rust_actions.yml
 - data
-    - wages_by_education.csv (data for the CRUD operations)
-- sqlite (main project folder)
+    - test_data.csv
+    - wages_by_education.csv
+- python_files
+    - extract.py
+    - query.py
+    - transform.py
+- rust_files
     - src
         - lib.rs
         - main.rs
     - Cargo.lock
     - Cargo.toml
     - Makefile
+    - my_database.db
+- main.py
+- Makefile
+- my_database.db
+- query_log.md
 - README
+- requirements.txt
+- test_main.py
 - readme_screenshots folder
 ---
 ### How to Install Rust CLI Dependencies
@@ -52,7 +69,7 @@
     export PATH=$PATH:/Users/<yourusername>/<Path to Project on Local Machine>/<Your Repo Name>/<Your Project Name/target/release
 
 ##### On my local machine, it looks like this:
-    export PATH=$PATH:/Users/lilahduboff/Documents/MiniProj7/lilah_duboff_miniproj7/sqlite/target/release
+    export PATH=$PATH:/Users/lilahduboff/Documents/Duke\ DES\ Coursework/individual_project_2/lilah_duboff_individualproj2/rust_files/target/release
 
 ##### After running that command in the terminal, the flags can now be used. By running the help command, a list of available functions/flags will appear in the terminal, as shown in the image above. These flags allow the user to complete standard CRUD operations from the terminal, so long as the data/schema are updated accordingly.
 ---
@@ -75,6 +92,3 @@
 ![alt text](readme_screenshots/delete_image.png)
 
 ---
-### Tests
-##### As I am still naviagting Rust as a language, I've made three simple test functions to ensure that the project is able to create and connect to a database, generate a table, and drop a table. These tests all passed, and I will work on incorporating further testing as I become accustomed to working in Rust
-![alt text](readme_screenshots/test_image.png)
