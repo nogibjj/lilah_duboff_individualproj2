@@ -2,7 +2,7 @@
 
 # Individual Project 2/Mini Project 8: Rewriting a CRUD Operations Python Script in Rust
 ---
-### The purpose of this project is to take an existing python project, convert it to Rust, and compare the speed and efficiency of both scripts. This projects demonstrates how to perform CRUD operations in both Rust and Python, using a CLI (Command Line Integration) Tool. As usual, the folder structure and project walkthrough are below - however, I've decided to show my analysis results at the top of the readme for convenience, and directions for setup and use of the CLI tools are below.  
+##### The purpose of this project is to take an existing python project, convert it to Rust, and compare the speed and efficiency of both scripts. This projects demonstrates how to perform CRUD operations in both Rust and Python, using a CLI (Command Line Integration) Tool. As usual, the folder structure and project walkthrough are below - however, I've decided to show my analysis results at the top of the readme for convenience, and directions for setup and use of the CLI tools are below.  
 ---
 ### Demo Video Link:
 
