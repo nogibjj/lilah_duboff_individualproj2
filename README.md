@@ -6,8 +6,11 @@
 ---
 ##### The purpose of this project is to take an existing python project, convert it to Rust, and compare the speed and efficiency of both scripts. This projects demonstrates how to perform CRUD operations in both Rust and Python, using a CLI (Command Line Integration) Tool. As usual, the folder structure and project walkthrough are below - however, I've decided to show my analysis results at the top of the readme for convenience, and directions for setup and use of the CLI tools are below.  
 ---
+### Use of Codeium LLM for project assistance
+Use of LLM: In your README, explain how you utilized an LLM in your coding process.
+---
 ### Demo Video Link:
-
+Video Demo: A YouTube link in README.md showing a clear, concise walkthrough and demonstration of your CLI binary.
 ___
 ### Rust vs Python - which is faster?
 
