@@ -42,7 +42,7 @@ enum Commands {
         table_name: String,
         file_path: String,
     },
-    ///Pass a table name, a set clause, and a condition to update a row inthe table
+    ///Pass a table name, a set clause, and a condition to update a row in the table
     /// sqlite -u table_name set_clause condition
     #[command(alias = "u", short_flag = 'u')]
     Update {
@@ -50,9 +50,9 @@ enum Commands {
         set_clause: String,
         condition: String,
     },
-
+    ///Pass two integers to find their mean
     #[command(alias = "m", short_flag = 'm')]
-    Mean { start: u64, end: u64 }
+    Mean { start: u64, end: u64 },
 }
 
 fn main() -> Result<()> {
@@ -98,7 +98,7 @@ fn main() -> Result<()> {
             println!("Executing update: {}", query);
             query_exec(&conn, &query).expect("Failed to execute update");
         }
-        Commands::Mean {start, end} => {
+        Commands::Mean { start, end } => {
             let data: Vec<f64> = (start..=end).map(|i| i as f64).collect();
 
             // Measure the time for get_mean
