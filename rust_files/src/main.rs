@@ -2,7 +2,8 @@
 //user defined arguments and call lib.rs logic to handle them
 use clap::{Parser, Subcommand};
 use rusqlite::{Connection, Result};
-use sqlite::{create_table, drop_table, load_data_from_csv, query_exec}; //import library logic
+use sqlite::{create_table, drop_table, get_mean, load_data_from_csv, query_exec}; //import library logic
+use std::time::Instant;
 
 //Here we define a struct (or object) to hold our CLI arguments
 //for #[STUFF HERE] syntax, these are called attributes. Dont worry about them
@@ -49,6 +50,9 @@ enum Commands {
         set_clause: String,
         condition: String,
     },
+
+    #[command(alias = "m", short_flag = 'm')]
+    Mean { start: u64, end: u64 }
 }
 
 fn main() -> Result<()> {
@@ -93,6 +97,21 @@ fn main() -> Result<()> {
             );
             println!("Executing update: {}", query);
             query_exec(&conn, &query).expect("Failed to execute update");
+        }
+        Commands::Mean {start, end} => {
+            let data: Vec<f64> = (start..=end).map(|i| i as f64).collect();
+
+            // Measure the time for get_mean
+            let start = Instant::now();
+            match get_mean(&data) {
+                Ok(mean) => println!("Mean: {}", mean),
+                Err(e) => println!("Error calculating mean: {}", e),
+            }
+            let duration = start.elapsed();
+            println!(
+                "Time taken by get_mean: {} microseconds",
+                duration.as_micros()
+            );
         }
     }
     Ok(())
