@@ -9,10 +9,10 @@ from python_files.query import create, read, update, delete, query_1, query_2
 
 # import time
 
-database = "./sqlite/my_database.db"
+database = "my_database.db"
 table = "wages"
 url = "https://raw.githubusercontent.com/lilah-duboff/data-for-URLS/refs/heads/main/wages_by_education%20copy.csv"
-path = "data/wages_by_education copy.csv"
+path = "data/wages_by_education_copy.csv"
 folder = "data"
 payload = (2025, 15.00, 18.00, 20.00, 30.00, 50.00)
 
@@ -33,10 +33,10 @@ create(payload, database, table)
 read(database, table)
 
 # UPDATE
-update(database, table, "year", 2026, "2022")
+update(database, table, "year", 2026, 2022)
 
 # DELETE
-delete(database, table, "2026")
+delete(database, table, 2021)
 
 
 # Query

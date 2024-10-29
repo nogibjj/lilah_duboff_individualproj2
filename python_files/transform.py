@@ -10,7 +10,7 @@ def transform(data):
     payload = csv.reader(open(data, newline=""), delimiter=",")
     next(payload)
 
-    conn = sqlite3.connect("./sqlite/my_database.db")
+    conn = sqlite3.connect("my_database.db")
     c = conn.cursor()
     c.execute("DROP TABLE IF EXISTS wages")
     c.execute(

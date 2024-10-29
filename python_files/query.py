@@ -43,7 +43,7 @@ def read(data, table):
 
 
 def update(data, table, column, new_value, year):
-    """Update a specific column in a row based on Employee_ID"""
+    """Update a specific column in a row based on year"""
     conn = sqlite3.connect(data)
     c = conn.cursor()
     query = f"UPDATE {table} SET {column} = ? WHERE year = ?"
