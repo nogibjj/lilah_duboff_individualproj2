@@ -9,11 +9,11 @@ pub fn create_table(conn: &Connection, table_name: &str) -> Result<()> {
     let create_query = format!(
         "CREATE TABLE IF NOT EXISTS {} (
             year INTEGER PRIMARY KEY,
-            less_than_hs INTEGER NOT NULL,
-            high_school INTEGER NOT NULL,
-            some_college INTEGER NOT NULL,
-            bachelors_degree INTEGER NOT NULL,
-            advanced_degree INTEGER NOT NULL
+            less_than_hs REAL,
+            high_school REAL,
+            some_college REAL,
+            bachelors_degree REAL,
+            advanced_degree REAL
         )",
         table_name
     );
@@ -31,11 +31,11 @@ pub fn query_exec(conn: &Connection, query_string: &str) -> Result<()> {
     let rows = stmt.query_map([], |row| {
         // Assuming the `users` table has an `id` and `name` column
         let year: i32 = row.get(0)?;
-        let less_than_hs: i32 = row.get(1)?;
-        let high_school: i32 = row.get(2)?;
-        let some_college: i32 = row.get(3)?;
-        let bachelors_degree: i32 = row.get(4)?;
-        let advanced_degree: i32 = row.get(5)?;
+        let less_than_hs: f32 = row.get(1)?;
+        let high_school: f32 = row.get(2)?;
+        let some_college: f32 = row.get(3)?;
+        let bachelors_degree: f32 = row.get(4)?;
+        let advanced_degree: f32 = row.get(5)?;
         Ok((
             year,
             less_than_hs,
@@ -147,13 +147,21 @@ pub fn update_table(
     Ok(())
 }
 
+pub fn get_mean(x: &[f64]) -> Result<f64, Box<dyn Error>> {
+    if x.is_empty() {
+        return Err("Cannot compute mean of an empty vector.".into());
+    }
+    let sum: f64 = x.iter().sum();
+    Ok(sum / x.len() as f64)
+}
+
 // TEST FUNCTIONS
 
 #[cfg(test)]
 mod tests {
     use super::*;
     use rusqlite::{Connection, Result};
-    use std::io::Write;
+    // use std::io::Write;
 
     #[test]
     fn test_create_table() -> Result<()> {
@@ -170,13 +178,13 @@ mod tests {
     fn test_query_exec() -> Result<(), Box<dyn Error>> {
         let conn = Connection::open_in_memory()?;
         create_table(&conn, "test_table")?;
-        load_data_from_csv(&conn, "test_table", "../data/test_data.csv")?;
+        load_data_from_csv(&conn, "test_table", "../data/wages_by_education_copy.csv")?;
 
         let query_string = "SELECT * FROM test_table";
         query_exec(&conn, query_string)?;
 
         // Check that the query returned some rows
-        let mut stmt = conn.prepare("SELECT COUNT(*) FROM test_table")?;
+        let mut stmt = conn.prepare("SELECT * FROM test_table LIMIT 5")?;
         let mut rows = stmt.query([])?;
         let count: i32 = rows.next().unwrap().unwrap().get(0).unwrap();
         assert!(count > 0);
@@ -196,4 +204,23 @@ mod tests {
         assert!(rows.next().unwrap().is_none());
         Ok(())
     }
+
+    // #[test]
+    // fn test_update_table() -> Result<()> {
+    //     let conn = Connection::open_in_memory()?;
+    //     conn.execute(
+    //         "CREATE TABLE test_table (year INTEGER PRIMARY KEY, less_than_hs REAL, high_school REAL, some_college REAL, bachelors_degree REAL, advanced_degree REAL);",
+    //         [],
+    //     )?;
+    //     conn.execute("INSERT INTO test_table (year, less_than_hs, high_school, some_college, bachelors_degree, advanced_degree) VALUES (3000, 0.0, 0.0, 0.0, 0.0, 0.0);", [])?;
+
+    //     update_table(&conn, "test_table", "year = '2500'", "year = 3000")?;
+
+    //     let mut stmt = conn.prepare("SELECT year FROM test_table WHERE year = 2500;")?;
+    //     let row = stmt.query([])?.next().unwrap()?;
+    //     let year: String = row.get(0)?;
+    //     assert_eq!(year, "2500");
+
+    //     Ok(())
+    // }
 }
