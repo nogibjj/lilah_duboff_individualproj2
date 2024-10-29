@@ -9,7 +9,7 @@ def get_mean(x):
     return mean
 
 
-x = [i for i in range(1, 10000)]
+x = [i for i in range(1, 1_000_000)]
 
 start = time.time()
 get_mean(x)
