@@ -11,6 +11,8 @@
 ---
 ### Demo Video Link:
 
+https://youtu.be/IqEMb3r1XUg
+
 ___
 ### Rust vs Python - which is faster?
 ##### In addition to rewriting the python script, this project also provides a comparison of Rust and Python's speed and resource usage advantages and disadvantages. Rust is a compiled (or binary deployement) language, meaning that the code compiles into a single executable file. This method is faster and more efficient for users, but has limited flexibility, as binaries are platform-specific. 
